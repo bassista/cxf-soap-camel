@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="order" resourceRoot="" soapui-version="3.5" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="OrderBinding" type="wsdl" bindingName="{http://order.camel}OrderBinding" soapVersion="1_1" anonymous="optional" definition="file:/Users/chris/Dev/Java/training/camel/src/main/resources/wsdl/order.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/Users/chris/Dev/Java/training/camel/src/main/resources/wsdl/order.wsdl"><con:part><con:url>file:/Users/chris/Dev/Java/training/camel/src/main/resources/wsdl/order.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://order.camel" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://order.camel" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  ￼￼￼￼￼￼
+    ￼
+  <wsdl:types>
+    <xs:schema targetNamespace="http://order.camel">
+      <xs:element type="xs:string" name="partName"/>
+      <xs:element type="xs:int" name="amount"/>
+      <xs:element type="xs:string" name="customerName"/>
+      <xs:element type="xs:string" name="resultCode"/>
+    </xs:schema>
+  </wsdl:types>
+  ￼
+  <wsdl:message name="purchaseOrder">
+    <wsdl:part name="partName" element="tns:partName"/>
+    <wsdl:part name="amount" element="tns:amount"/>
+    <wsdl:part name="customerName" element="tns:customerName"/>
+  </wsdl:message>
+  ￼
+  <wsdl:message name="orderResult">
+    <wsdl:part name="resultCode" element="tns:resultCode"/>
+  </wsdl:message>
+  <wsdl:portType name="OrderEndpoint">
+    <wsdl:operation name="Order">
+      <wsdl:input message="tns:purchaseOrder"/>
+      <wsdl:output message="tns:orderResult"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="OrderBinding" type="tns:OrderEndpoint">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Order">
+      <soap:operation soapAction="http://order.camel/Order" style="document"/>
+      ￼￼
+      <wsdl:input>
+        <soap:body parts="in" use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body parts="out" use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="OrderEndpointService">
+    <wsdl:port name="OrderService" binding="tns:OrderBinding">
+      <soap:address location="http://localhost:9000/order"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:9000/order</con:endpoint><con:endpoint>http://MacBook-de-Christophe.local:8088/mockOrderBinding</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://order.camel/Order" name="Order" bindingOperationName="Order" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://MacBook-de-Christophe.local:8088/mockOrderBinding</con:endpoint><con:request>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   &lt;soapenv:Body/>
+&lt;/soapenv:Envelope></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://order.camel/Order"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Copy of Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://MacBook-de-Christophe.local:8088/mockOrderBinding</con:endpoint><con:request>&lt;soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   &lt;soapenv:Body/>
+&lt;/soapenv:Envelope></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://order.camel/Order"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="TestSuite 1"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCase 1" searchProperties="true"><con:settings/><con:testStep type="mockresponse" name="Order"><con:settings/><con:config xsi:type="con:MockResponseStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>OrderBinding</con:interface><con:operation>Order</con:operation><con:path>/Order</con:path><con:port>8181</con:port><con:response><con:settings/><con:responseContent xsi:nil="true"/><con:wsaConfig mustUnderstand="NONE" version="200508"/></con:response></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:mockService port="8088" path="/mockOrderBinding" host="MacBook-de-Christophe.local" name="OrderBinding MockService" bindToHostOnly="false" docroot="" faultMockOperation="Order"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.mock.WsdlMockService@require-soap-action">false</con:setting></con:settings><con:mockOperation name="Order" interface="OrderBinding" operation="Order"><con:settings/><con:dispatchStyle>QUERY_MATCH</con:dispatchStyle><con:defaultResponse>successfull</con:defaultResponse><con:response name="successfull" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+   <soapenv:Body>
+<resultCode xmlns="http://order.camel">OK</resultCode>
+</soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://order.camel/Order"/></con:response><con:response name="unsuccessfull" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+      <soapenv:Body>
+<resultCode xmlns="http://order.camel">KO</resultCode>
+</soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://order.camel/Order"/></con:response><con:response name="fault" encoding="UTF-8"><con:settings/><con:responseContent><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Body>
+    <soapenv:Fault>
+      <faultcode>qname</faultcode>
+      <faultstring xml:lang="">sonoras imperio</faultstring>
+      <!--Optional:-->
+      <faultactor>http://www.any.org/ventos/verrantque</faultactor>
+      <!--Optional:-->
+      <detail>
+        <!--You may enter ANY elements at this point-->
+      </detail>
+    </soapenv:Fault>
+  </soapenv:Body>
+</soapenv:Envelope>]]></con:responseContent><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://order.camel/Order"/></con:response><con:dispatchConfig xsi:type="con:MockOperationQueryMatchDispatch" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:query><con:name>select successful</con:name><con:query>declare namespace tst="http://order.camel"
+//tst:amount</con:query><con:match>1</con:match><con:response>successfull</con:response></con:query><con:query><con:name>select unsuccessful</con:name><con:query>declare namespace tst="http://order.camel"
+//tst:amount</con:query><con:match>10</con:match><con:response>unsuccessfull</con:response></con:query><con:query><con:name>select fault</con:name><con:query>declare namespace tst="http://order.camel"
+//tst:amount</con:query><con:match>-1</con:match><con:response>fault</con:response></con:query></con:dispatchConfig></con:mockOperation><con:properties/></con:mockService><con:properties/><con:wssContainer/></con:soapui-project>
